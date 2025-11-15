@@ -53,6 +53,11 @@ const responseSchema = {
             type: Type.ARRAY,
             description: "A list of recommended next steps or actions. Omit if not applicable. Each action should be a short, clear string.",
             items: { type: Type.STRING }
+          },
+          impacts: {
+            type: Type.ARRAY,
+            description: "A list of potential quantitative impacts resulting from the recommended actions (e.g., '~$25k increase in revenue', 'Reduce churn by 5%', 'Save 10 engineering hours/week'). Omit if not applicable. Each impact should be a short, clear string.",
+            items: { type: Type.STRING }
           }
         },
         required: ['id', 'title', 'summary', 'reasons'],

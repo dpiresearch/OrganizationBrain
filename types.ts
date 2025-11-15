@@ -12,6 +12,7 @@ export interface StructuredInsight {
   reasons: string[];
   risks?: string[];
   actions?: string[];
+  impacts?: string[];
 }
 
 export interface ChatMessage {

@@ -57,3 +57,7 @@ export const AlertTriangle: React.FC<React.SVGProps<SVGSVGElement>> = (props) =>
 export const Wand: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <Icon {...props}><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="m3 7 1.2 1.2"/><path d="M19 7s-1 6-7 6-7-6-7-6"/><path d="M6.2 11.8 5 13"/><path d="M12 16v6"/><path d="M12 3v1"/></Icon>
 );
+
+export const DollarSign: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <Icon {...props}><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></Icon>
+);

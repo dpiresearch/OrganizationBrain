@@ -1,6 +1,6 @@
 import React from 'react';
 import type { StructuredInsight } from '../types';
-import { TrendingUp, CheckCircle, AlertTriangle, Wand } from './icons';
+import { TrendingUp, CheckCircle, AlertTriangle, Wand, DollarSign } from './icons';
 
 interface StructuredResponseProps {
   insight: StructuredInsight;
@@ -39,7 +39,7 @@ export const StructuredResponse: React.FC<StructuredResponseProps> = ({ insight 
       </div>
       <p className="text-sm text-gray-300 mb-4 italic">"{insight.summary}"</p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
         <InsightSection 
           title="Key Reasons" 
           items={insight.reasons} 
@@ -57,6 +57,12 @@ export const StructuredResponse: React.FC<StructuredResponseProps> = ({ insight 
           items={insight.actions || []} 
           icon={<Wand className="w-4 h-4 mr-2" />}
           className="text-indigo-400"
+        />
+        <InsightSection 
+          title="Potential Impact" 
+          items={insight.impacts || []} 
+          icon={<DollarSign className="w-4 h-4 mr-2" />}
+          className="text-cyan-400"
         />
       </div>
     </div>
