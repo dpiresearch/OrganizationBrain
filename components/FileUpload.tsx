@@ -1,4 +1,5 @@
 
+
 import React, { useState, useCallback } from 'react';
 import { UploadCloud } from './icons';
 
@@ -44,7 +45,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
   const dragClass = isDragging ? 'border-indigo-400 bg-gray-700' : 'border-gray-600';
 
   return (
-    <div>
+    <div className="mt-2">
       <label
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}

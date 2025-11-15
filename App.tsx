@@ -10,7 +10,7 @@ import { ChatHistory } from './components/ChatHistory';
 import { Dashboard } from './components/Dashboard';
 import { analyzeData, generateSpeech } from './services/geminiService';
 import { playAudio, stopAudio, encode } from './services/audioService';
-import { FileText, BrainCircuit } from './components/icons';
+import { FileText, BrainCircuit, Plug, Database, BookOpen, Terminal, UploadCloud } from './components/icons';
 
 const App: React.FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
@@ -240,16 +240,50 @@ const App: React.FC = () => {
       <div className="w-1/3 max-w-md bg-gray-800 p-6 flex flex-col h-full border-r border-gray-700">
         <div className="flex items-center mb-6">
           <BrainCircuit className="w-8 h-8 text-indigo-400 mr-3" />
-          <h1 className="text-2xl font-bold text-white">Product Intel AI</h1>
+          <div>
+            <h1 className="text-2xl font-bold text-white">Org Brain</h1>
+            <p className="text-xs text-gray-400">AI-powered organization learning system</p>
+          </div>
         </div>
         <div className="flex-grow flex flex-col overflow-y-auto">
-          <FileUpload onFileUpload={handleFileUpload} />
+          
           <div className="mt-6">
-            <h2 className="text-lg font-semibold text-gray-300 mb-3">Uploaded Documents</h2>
-            {uploadedFiles.length === 0 ? (
-              <p className="text-sm text-gray-500">No files uploaded yet.</p>
-            ) : (
-              <ul className="space-y-2">
+            <h2 className="text-lg font-semibold text-gray-300 mb-3 flex items-center">
+              <Plug className="w-5 h-5 mr-2 text-gray-400" />
+              Integrated Systems
+            </h2>
+            <ul className="space-y-2">
+              <li className="flex items-center bg-gray-700/50 p-2 rounded-md text-sm text-gray-400 cursor-not-allowed">
+                <Database className="w-4 h-4 text-sky-400 mr-2 flex-shrink-0" />
+                <span className="truncate">Salesforce</span>
+              </li>
+              <li className="flex items-center bg-gray-700/50 p-2 rounded-md text-sm text-gray-400 cursor-not-allowed">
+                <BookOpen className="w-4 h-4 text-gray-300 mr-2 flex-shrink-0" />
+                <span className="truncate">Notion</span>
+              </li>
+              <li className="flex items-center bg-gray-700/50 p-2 rounded-md text-sm text-gray-400 cursor-not-allowed">
+                <Database className="w-4 h-4 text-orange-400 mr-2 flex-shrink-0" />
+                <span className="truncate">Hubspot</span>
+              </li>
+              <li className="flex items-center bg-gray-700/50 p-2 rounded-md text-sm text-gray-400 cursor-not-allowed">
+                <BookOpen className="w-4 h-4 text-indigo-400 mr-2 flex-shrink-0" />
+                <span className="truncate">Internal Documentation</span>
+              </li>
+              <li className="flex items-center bg-gray-700/50 p-2 rounded-md text-sm text-gray-400 cursor-not-allowed">
+                <Terminal className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" />
+                <span className="truncate">Operational Logs</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold text-gray-300 mb-3 flex items-center">
+                <UploadCloud className="w-5 h-5 mr-2 text-gray-400" />
+                Uploaded Documents
+            </h2>
+             <FileUpload onFileUpload={handleFileUpload} />
+            {uploadedFiles.length > 0 && (
+              <ul className="space-y-2 mt-4">
                 {uploadedFiles.map((file, index) => (
                   <li key={index} className="flex items-center justify-between bg-gray-700 p-2 rounded-md text-sm">
                     <div className="flex items-center overflow-hidden">
