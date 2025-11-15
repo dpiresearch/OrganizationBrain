@@ -1,7 +1,7 @@
-
 import React, { useEffect, useRef } from 'react';
 import type { ChatMessage } from '../types';
-import { Bot, User, Loader, Volume2, StopCircle } from './icons';
+import { Bot, User, Loader, StopCircle } from './icons';
+import { StructuredResponse } from './StructuredResponse';
 
 interface ChatHistoryProps {
   messages: ChatMessage[];
@@ -10,7 +10,7 @@ interface ChatHistoryProps {
   onStopAudio: () => void;
 }
 
-const ChatMessageContent: React.FC<{ message: ChatMessage; isSpeaking: boolean; onStopAudio: () => void; }> = ({ message, isSpeaking, onStopAudio }) => {
+const ChatMessageContent: React.FC<{ message: ChatMessage; isLastMessage: boolean; isSpeaking: boolean; onStopAudio: () => void; }> = ({ message, isLastMessage, isSpeaking, onStopAudio }) => {
     // Basic markdown to HTML conversion
     const formatContent = (content: string) => {
         let html = content.replace(/\n/g, '<br />'); // New lines
@@ -22,14 +22,25 @@ const ChatMessageContent: React.FC<{ message: ChatMessage; isSpeaking: boolean; 
     if (message.role === 'assistant') {
         return (
             <div className="flex items-start space-x-4">
-                <div className="bg-indigo-500 rounded-full p-2">
+                <div className="bg-indigo-500 rounded-full p-2 flex-shrink-0">
                     <Bot className="w-5 h-5 text-white" />
                 </div>
-                <div className="flex-1 bg-gray-800 p-4 rounded-lg rounded-tl-none">
-                    <div className="prose prose-invert max-w-none text-gray-300" dangerouslySetInnerHTML={formatContent(message.content)} />
-                    {isSpeaking && <button onClick={onStopAudio} className="mt-3 flex items-center text-sm text-indigo-400 hover:text-indigo-300">
-                      <StopCircle className="w-4 h-4 mr-1" /> Stop Audio
-                    </button>}
+                <div className="flex-1">
+                    <div className="bg-gray-800 p-4 rounded-lg rounded-tl-none">
+                        <div className="prose prose-invert max-w-none text-gray-300" dangerouslySetInnerHTML={formatContent(message.content)} />
+                        {isLastMessage && isSpeaking && (
+                            <button onClick={onStopAudio} className="mt-3 flex items-center text-sm text-indigo-400 hover:text-indigo-300">
+                              <StopCircle className="w-4 h-4 mr-1" /> Stop Audio
+                            </button>
+                        )}
+                    </div>
+                    {message.structuredData && message.structuredData.length > 0 && (
+                      <div className="mt-4 space-y-4">
+                        {message.structuredData.map((insight) => (
+                          <StructuredResponse key={insight.id} insight={insight} />
+                        ))}
+                      </div>
+                    )}
                 </div>
             </div>
         );
@@ -58,7 +69,12 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, isLoading, i
   return (
     <div className="space-y-6">
       {messages.map((msg, index) => (
-        <ChatMessageContent key={index} message={msg} isSpeaking={isSpeaking && index === messages.length -1} onStopAudio={onStopAudio}/>
+        <ChatMessageContent 
+          key={index} 
+          message={msg} 
+          isLastMessage={index === messages.length -1}
+          isSpeaking={isSpeaking} 
+          onStopAudio={onStopAudio}/>
       ))}
       {isLoading && (
         <div className="flex items-start space-x-4">

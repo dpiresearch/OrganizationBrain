@@ -4,9 +4,20 @@ export interface UploadedFile {
   fileObject?: File;
 }
 
+export interface StructuredInsight {
+  id: string;
+  title: string;
+  confidence?: number;
+  summary: string;
+  reasons: string[];
+  risks?: string[];
+  actions?: string[];
+}
+
 export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+  structuredData?: StructuredInsight[];
 }
 
 export interface ChartDataPoint {
@@ -27,5 +38,6 @@ export interface DashboardData {
 
 export interface AnalysisResponse {
   summary: string;
+  insights: StructuredInsight[];
   charts: Chart[];
 }

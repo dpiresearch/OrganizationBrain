@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export const Icon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
@@ -31,10 +30,6 @@ export const Loader: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <Icon {...props}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></Icon>
 );
 
-export const Volume2: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <Icon {...props}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></Icon>
-);
-
 export const StopCircle: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <Icon {...props}><circle cx="12" cy="12" r="10"/><rect width="6" height="6" x="9" y="9"/></Icon>
 );
@@ -45,4 +40,20 @@ export const BrainCircuit: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
 
 export const Microphone: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <Icon {...props}><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></Icon>
+);
+
+export const CheckCircle: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <Icon {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></Icon>
+);
+
+export const TrendingUp: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <Icon {...props}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></Icon>
+);
+
+export const AlertTriangle: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <Icon {...props}><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></Icon>
+);
+
+export const Wand: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <Icon {...props}><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="m3 7 1.2 1.2"/><path d="M19 7s-1 6-7 6-7-6-7-6"/><path d="M6.2 11.8 5 13"/><path d="M12 16v6"/><path d="M12 3v1"/></Icon>
 );

@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useRef } from 'react';
 // FIX: Import LiveServerMessage from @google/genai and remove non-existent LiveSession.
 import { GoogleGenAI, Modality, LiveServerMessage } from '@google/genai';
@@ -208,9 +207,10 @@ const App: React.FC = () => {
         throw new Error("The AI returned an invalid data format. Please try again.");
       }
       
-      const { summary, charts } = analysisResponse;
+      const { summary, insights, charts } = analysisResponse;
 
-      setChatHistory((prev) => [...prev, { role: 'assistant', content: summary }]);
+      setChatHistory((prev) => [...prev, { role: 'assistant', content: summary, structuredData: insights }]);
+
       if (charts && charts.length > 0) {
         setDashboardData({ charts });
       }

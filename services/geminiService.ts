@@ -15,7 +15,48 @@ const responseSchema = {
   properties: {
     summary: {
       type: Type.STRING,
-      description: "A concise text summary answering the user's question based on the provided files. Format using markdown."
+      description: "A concise, top-level text summary answering the user's question based on the provided files. Format using markdown. This should be a brief overview of the findings."
+    },
+    insights: {
+      type: Type.ARRAY,
+      description: "A list of structured insights or predictions. For example, a list of sales leads likely to close, or customers likely to churn.",
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: {
+            type: Type.STRING,
+            description: "A unique identifier for the item (e.g., deal_id, customer_id)."
+          },
+          title: {
+            type: Type.STRING,
+            description: "The name of the item being analyzed (e.g., company name, feature name)."
+          },
+          confidence: {
+            type: Type.NUMBER,
+            description: "A score from 0 to 100 representing the confidence in the prediction. Omit if not applicable (e.g., for feature requests)."
+          },
+          summary: {
+             type: Type.STRING,
+             description: "A one-sentence summary for this specific item."
+          },
+          reasons: {
+            type: Type.ARRAY,
+            description: "A list of key reasons or evidence supporting the insight. Each reason should be a short, clear string.",
+            items: { type: Type.STRING }
+          },
+          risks: {
+            type: Type.ARRAY,
+            description: "A list of potential risks or negative factors. Omit if none. Each risk should be a short, clear string.",
+            items: { type: Type.STRING }
+          },
+          actions: {
+            type: Type.ARRAY,
+            description: "A list of recommended next steps or actions. Omit if not applicable. Each action should be a short, clear string.",
+            items: { type: Type.STRING }
+          }
+        },
+        required: ['id', 'title', 'summary', 'reasons'],
+      }
     },
     charts: {
       type: Type.ARRAY,
@@ -62,7 +103,7 @@ const responseSchema = {
       }
     }
   },
-  required: ['summary', 'charts'],
+  required: ['summary', 'insights', 'charts'],
 };
 
 
@@ -76,8 +117,10 @@ ${file.content}
   const fullPrompt = `
     User Question: "${userQuery}"
 
-    ${files.length > 0 ? `Please analyze the following documents to answer the user's question:
-    ${fileContents}` : 'Please answer the user\'s question.'}
+    Analyze the provided documents to answer the user's question. Provide a main summary, a detailed list of structured insights, and any relevant charts.
+    
+    ${files.length > 0 ? `Documents:
+    ${fileContents}` : ''}
   `;
 
   const response = await ai.models.generateContent({
