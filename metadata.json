@@ -1,0 +1,7 @@
+{
+  "name": "Product Intelligence Dashboard",
+  "description": "An application that allows users to ask questions about their organization and products. It analyzes uploaded documents like intelligence reports, log files, and analytics to provide insights through a dashboard and voice replies.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
